@@ -1,0 +1,26 @@
+[package]
+name = "whistle"
+version = "0.1.0"
+edition = "2021"
+authors = [ "Nathan ROYER <nathan.royer.pro@gmail.com>" ]
+description = "TLS alternative which works on UDP"
+license = "MIT"
+categories = [ "cryptography" ]
+repository = "https://github.com/NathanRoyer/whistle"
+readme = "../README.md"
+
+[dependencies]
+rand_core = "0.6"
+
+curve25519-dalek = { version = "3.2.1", optional = true, default-features = false, features = [ "u64_backend" ] }
+hkdf = { version = "0.12.3", optional = true, default-features = false }
+chacha20poly1305 = { version = "0.9.0", optional = true, default-features = false }
+sha2 = { version = "0.10.2", optional = true, default-features = false }
+poly1305 = { version = "0.7.2", optional = true, default-features = false }
+
+[features]
+default = [ "default-sp" ]
+default-sp = [ "curve25519-dalek", "hkdf", "chacha20poly1305", "sha2", "poly1305" ]
+
+[dev-dependencies]
+chacha20 = { version = "0.8.0", features = [ "rng" ] }
