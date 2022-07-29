@@ -7,7 +7,7 @@ description = "TLS alternative which works on UDP"
 license = "MIT"
 categories = [ "cryptography" ]
 repository = "https://github.com/NathanRoyer/whistle"
-readme = "../README.md"
+readme = "README.md"
 
 [dependencies]
 rand_core = "0.6"
