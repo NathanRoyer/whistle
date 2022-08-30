@@ -113,7 +113,7 @@ impl ReliableConnection {
     pub fn on_timeout(
         &mut self,
         to_send: &mut [u8],
-    ) -> Result<(Option<usize>, Reaction), Error> {
+    ) -> Result<Option<usize>, Error> {
         self.consecutive_timeouts += 1;
         if self.peer_must_tell {
             if self.consecutive_timeouts >= self.downgrade_condition {
@@ -126,9 +126,9 @@ impl ReliableConnection {
             self.consecutive_timeouts = 0;
             let reply = Datagram::Tell(MessageNum::MAX);
             let written = reply.dump(to_send)?;
-            return Ok((Some(written), Ignore));
+            return Ok(Some(written));
         }
-        Ok((None, Ignore))
+        Ok(None)
     }
 
     pub fn on_datagram<M: MessageStorage>(
